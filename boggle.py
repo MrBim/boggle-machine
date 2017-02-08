@@ -13,6 +13,7 @@ def neighbours_of_position((row, col)):
             (row, col - 1), (row, col + 1),
             (row + 1, col - 1), (row + 1, col), (row + 1, col + 1)}
 
+
 def all_grid_neighbours(grid):
     neighbours = {}
     for position in grid:
@@ -20,12 +21,15 @@ def all_grid_neighbours(grid):
         neighbours[position] = [p for p in position_neighbours if p in grid]
     return neighbours
 
+
 def path_to_word(grid, path):
     return ''.join([grid[p] for p in path])
+
 
 def search(grid, dictionary):
     neighbours = all_grid_neighbours(grid)
     paths = []
+
     def do_search(path):
         word = path_to_word(grid, path)
         if word in dictionary:
@@ -42,6 +46,18 @@ def search(grid, dictionary):
         words.append(path_to_word(grid, path))
     return set(words)
 
+
 def get_dictionary(dictionary_file):
     with open(dictionary_file) as f:
         return [w.strip().upper() for w in f]
+
+
+def main():
+    grid = make_grid(3, 3)
+    dictionary = get_dictionary('/Users/bimwilliams/PycharmProjects/boggle-machine/words.txt')
+    words = search(grid, dictionary)
+    for word in words:
+        print word
+    print "Found {0} words".format(len(words))
+
+main()

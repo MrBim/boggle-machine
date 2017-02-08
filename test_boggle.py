@@ -58,3 +58,4 @@ class TestBoggle(unittest.TestCase):
     def test_load_dictionary(self):
         dictionary = boggle.get_dictionary('/Users/bimwilliams/PycharmProjects/boggle-machine/words.txt')
         self.assertGreater(len(dictionary), 0)
+
